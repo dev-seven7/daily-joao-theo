@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily · Seven7</title>
+<style>
+  :root{
+    --bg:#0f1115; --surface:#171a21; --surface2:#1e222b; --line:#2a2f3a;
+    --txt:#e8eaed; --txt2:#9aa3b2; --txt3:#6b7483;
+    --p0:#ff5d5d; --p1:#ffa53d; --p2:#5bb8ff; --ok:#3ecf8e;
+    --accent:#7c8cff;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f4f6fa; --surface:#fff; --surface2:#f0f3f8; --line:#e2e7f0;
+      --txt:#1a1d24; --txt2:#5a6474; --txt3:#8b94a5; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;padding-bottom:60px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+
+  header{background:linear-gradient(135deg,#1b1f2b,#2a2140);border-bottom:1px solid var(--line);
+    padding:26px 0 22px;margin-bottom:22px}
+  @media (prefers-color-scheme: light){header{background:linear-gradient(135deg,#2a2140,#3d2f5c)}}
+  header h1{margin:0;font-size:26px;letter-spacing:-.4px;color:#fff}
+  header .sub{color:#b9bfd0;font-size:14px;margin-top:4px}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 26px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;
+    cursor:pointer;transition:.15s}
+  .kpi:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .kpi b{display:block;font-size:26px;line-height:1.1}
+  .kpi span{font-size:11px;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px}
+
+  section{margin-bottom:30px}
+  h2{font-size:19px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+  h2 .count{font-size:12px;color:var(--txt2);background:var(--surface2);border:1px solid var(--line);
+    border-radius:20px;padding:2px 10px;font-weight:500}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+  .card.urgente{border-left:4px solid var(--p0)}
+  .card .body{flex:1;min-width:0}
+  .card .t{font-weight:600;margin-bottom:3px}
+  .card .n{font-size:14px;color:var(--txt2)}
+  .card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+  a.ref{font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    background:var(--surface2);border:1px solid var(--line);border-radius:6px;padding:2px 8px;
+    color:var(--accent);text-decoration:none}
+  a.ref:hover{border-color:var(--accent)}
+  .ref.off{color:var(--txt3)}
+  .badge{font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;letter-spacing:.3px}
+  .P0{background:rgba(255,93,93,.15);color:var(--p0)}
+  .P1{background:rgba(255,165,61,.15);color:var(--p1)}
+  .P2{background:rgba(91,184,255,.15);color:var(--p2)}
+  .tag{font-size:11px;color:var(--txt2);border:1px solid var(--line);border-radius:6px;padding:2px 7px}
+  .data{font-size:12px;color:var(--txt3)}
+  .quem{font-size:12px;font-weight:600;color:var(--txt)}
+
+  .chk{appearance:none;width:22px;height:22px;min-width:22px;border:2px solid var(--line);
+    border-radius:7px;margin-top:2px;cursor:pointer;position:relative;background:transparent}
+  .chk:checked{background:var(--ok);border-color:var(--ok)}
+  .chk:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;
+    justify-content:center;color:#08130d;font-weight:800;font-size:14px}
+  .done .t,.done .n{opacity:.45;text-decoration:line-through}
+
+  .bloco{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+  .bloco > summary{padding:14px 16px;cursor:pointer;font-weight:600;display:flex;
+    justify-content:space-between;align-items:center;gap:8px;list-style:none}
+  .bloco > summary::-webkit-details-marker{display:none}
+  .bloco > summary:hover{background:var(--surface2)}
+  .bloco .itens{padding:4px 16px 14px;border-top:1px solid var(--line)}
+  .item{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+  .item:last-child{border-bottom:none}
+  .prog{font-size:12px;color:var(--txt2);font-weight:500;white-space:nowrap}
+
+  .feito .t{font-size:14px}
+  .feitolista{display:grid;gap:6px}
+  .feitolista .l{display:flex;gap:10px;align-items:baseline;font-size:14px;color:var(--txt2);
+    padding:7px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+  .feitolista .l b{color:var(--ok);font-weight:700}
+
+  .filtros{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .f{font-size:13px;background:var(--surface);border:1px solid var(--line);color:var(--txt2);
+    border-radius:20px;padding:5px 13px;cursor:pointer}
+  .f.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .nota{font-size:13px;color:var(--txt3);margin-top:-6px;margin-bottom:14px}
+  footer{color:var(--txt3);font-size:13px;text-align:center;padding:26px 0;border-top:1px solid var(--line)}
+  @media (max-width:640px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    header h1{font-size:21px}
+    body{font-size:15px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1 id="titulo">Daily</h1>
+    <div class="sub" id="sub"></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="kpis">
+    <div class="kpi" onclick="irPara('atrasados')"><b style="color:var(--p0)" id="k1">0</b><span>atrasados</span></div>
+    <div class="kpi" onclick="irPara('vencendo')"><b style="color:var(--p1)" id="k2">0</b><span>vencendo</span></div>
+    <div class="kpi" onclick="irPara('mencoes')"><b style="color:var(--p2)" id="k3">0</b><span>menções</span></div>
+    <div class="kpi" onclick="irPara('checks')"><b style="color:var(--accent)" id="k4">0</b><span id="k4label">checks</span></div>
+  </div>
+
+  <section id="hoje">
+    <h2>🔴 Para entregar hoje</h2>
+    <div id="lista-hoje"></div>
+  </section>
+
+  <section id="ajustes" style="display:none">
+    <h2><span id="tit-aj"></span></h2>
+    <p class="nota" id="nota-aj"></p>
+    <div id="lista-ajustes"></div>
+  </section>
+
+  <section id="proximos">
+    <h2>🟠 Próximos dias <span class="count" id="c-prox"></span></h2>
+    <div id="lista-proximos"></div>
+  </section>
+
+  <section id="novidades">
+    <h2 id="tit-nov">🆕 Entrou no GitHub recentemente</h2>
+    <p class="nota" id="nota-nov">Chegou agora e ainda não tem prazo aqui. A data real fica dentro da própria issue.</p>
+    <div id="lista-novidades"></div>
+  </section>
+
+  <section id="vencendo">
+    <h2>⏳ Vencendo <span class="count" id="c-venc"></span></h2>
+    <div id="lista-vencendo"></div>
+  </section>
+
+  <section id="atrasados">
+    <h2>⏰ Atrasados <span class="count" id="c-atr"></span></h2>
+    <div class="filtros" id="filtros"></div>
+    <div id="lista-atrasados"></div>
+  </section>
+
+  <section id="mencoes">
+    <h2>📨 Esperando você <span class="count" id="c-men"></span></h2>
+    <p class="nota">Menções suas no GitHub sem resposta. Quem entregou algo está parado até você responder.</p>
+    <div id="lista-mencoes"></div>
+  </section>
+
+  <section id="checks">
+    <h2><span id="tit-chk">✅ Checks</span> <span class="count" id="c-chk"></span></h2>
+    <p class="nota" id="nota-chk"></p>
+    <div id="lista-checks"></div>
+  </section>
+
+  <section id="concluidos">
+    <h2>✅ Concluídos <span class="count" id="c-con"></span></h2>
+    <p class="nota">Tudo que você já deu check, some da lista original e fica só aqui. Desmarcar aqui devolve pro lugar de origem.</p>
+    <div id="lista-concluidos"></div>
+  </section>
+
+  <section id="feito">
+    <h2>🟢 Fechado nos últimos dias</h2>
+    <div class="feitolista" id="lista-feito"></div>
+  </section>
+
+</div>
+
+<footer>
+  Atualizado automaticamente a cada check do dia · <span id="rodape"></span>
+</footer>
+
+<script>
+/* dados embutidos: evita cache do arquivo externo */
+// Daily do João · dados atualizados a cada check do dia
+const DADOS = {
+ "atualizado": "01/10/2026 · 14h",
+ "titulo": "🎨 Daily do João",
+ "subtitulo": "Design e criativos · Seven7",
+ "labelChecks": "revisados",
+ "tituloChecks": "🧹 Saíram da lista · handoff da Manu e do Theo",
+ "notaChecks": "Cards que foram entregues, concluídos ou não são mais da esteira do João. Precisam ser atualizados no GitHub para o board parar de mostrá-los como atraso.",
+ "resumo": {
+  "atrasados": 9,
+  "vencendo": 10,
+  "mencoes": 24,
+  "checks": 14
+ },
+ "hojeManual": [
+  {
+   "t": "Terminar o cardápio da Temakeria · falta só as bebidas",
+   "c": "TMK#239",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/239",
+   "tag": "TMK",
+   "n": "É a última parte: as bebidas. O resto do cardápio já está fechado."
+  },
+  {
+   "t": "Criar a caixa do Gatola na Cartola",
+   "c": "cs-olivers#244",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/244",
+   "tag": "OLV",
+   "n": "Caixa padrão, interativa, para a criança pintar: metade colorida, metade para colorir. Referência no Drive do card. Entrega amanhã até meio-dia, com janela de ajuste até as 16h."
+  },
+  {
+   "t": "Ads do Grupo ROB · aplicar os ajustes da Gabi",
+   "c": "cs-rob-food#67",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/67",
+   "tag": "ROB",
+   "n": "Ler os comentários da Gabi e conferir antes de aplicar. A Manu já editou as duas peças nos comentários."
+  },
+  {
+   "t": "Dar um check em todas as suas marcações no GitHub",
+   "c": "",
+   "u": "",
+   "tag": "GERAL",
+   "n": "Você tem menções acumuladas esperando resposta. Passar uma vez por todas e responder o que estiver parado."
+  }
+ ],
+ "hoje": [],
+ "tituloNovidades": "⚪ Sem data · aguardando outra coisa",
+ "notaNovidades": "Não é para entregar agora: depende de resposta de terceiro ou de data que ainda não existe.",
+ "proximos": [
+  {
+   "t": "Criar os 3 estáticos de TOPO de funil da Temakeria",
+   "c": "TMK#230",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/230",
+   "tag": "TMK",
+   "d": "02/10",
+   "n": "Marca da Temakeria Universitária, produtos crus e posicionamento. Os de meio e fundo (incluindo o de cupom) começam na sequência, para entrega em 05/10. Cupons confirmados: TMKARARUAMA (10%, mínimo R$ 75) e PRESENTEARARUAMA (Big Hot grátis, mínimo R$ 75), e o mínimo precisa aparecer na peça."
+  },
+  {
+   "t": "Caixa do Gatola · entrega até meio-dia, ajuste até as 16h",
+   "c": "cs-olivers#244",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/244",
+   "tag": "OLV",
+   "d": "02/10",
+   "n": "O prazo das 16h fecha a entrega para a distribuidora."
+  },
+  {
+   "t": "Check final dos criativos do Grupo ROB",
+   "c": "cs-rob-food#67",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/67",
+   "tag": "ROB",
+   "d": "02/10",
+   "n": "Conferir o comentário e o feedback da Gabi e seguir aquele texto e aquela copy."
+  },
+  {
+   "t": "Check nas demandas de social dos canais",
+   "c": "",
+   "u": "",
+   "tag": "GERAL",
+   "d": "02/10",
+   "n": "Passar nas demandas de social dos canais e confirmar que está tudo certo."
+  },
+  {
+   "t": "Destaques novos do Instagram da Temakeria",
+   "c": "TMK#17",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/17",
+   "tag": "TMK",
+   "d": "07/10",
+   "n": "Capa dos destaques e os destaques de HORÁRIOS, ENDEREÇO e DELIVERY. Tem que estar no ar pelo menos 2 dias antes da inauguração de Araruama, que é 09/10. ⚠️ Você ainda não é assignee desse card no GitHub."
+  },
+  {
+   "t": "OLV · Revitalização Destaques Rodízio + À La Carte",
+   "c": "cs-olivers#105",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/105",
+   "tag": "OLV",
+   "n": "Rodízio feito. Falta a À La Carte e o destaque VALOR ESPECIAL do rodízio, com briefing em cs-olivers#203. · Último movimento: Luiza em 30/09 — joaovseven7 além do que você já entregou hoje, faltam 2 destaques novos: 1. À LA CARTE (briefing aqui no corpo da issue) - Capa do destaque · Junto com: Luiza",
+   "d": "07/10",
+   "p": "P1"
+  },
+  {
+   "t": "LANGS · Cardápio · Arte do papel de bandeja (salão) · Briefing + Design",
+   "c": "cs-langs#57",
+   "u": "https://github.com/dev-seven7/cs-langs/issues/57",
+   "tag": "LANGS",
+   "n": "Confirmado com o Anderson: vai ser feito. Levar 3 versões para ele aprovar. · Último movimento: Manu em 19/09 — Então, João, eu já perguntei para Anderson sobre essa demanda se ainda está de pé. Ele não nos respondeu, mas, de qualquer forma, é uma dema · Junto com: Manu",
+   "d": "07/10",
+   "p": "P1"
+  },
+  {
+   "t": "OGRO · Destaques + Bio do Instagram · atualização",
+   "c": "cs-ogro-steaks#13",
+   "u": "https://github.com/dev-seven7/cs-ogro-steaks/issues/13",
+   "tag": "OGRO",
+   "n": "É só a atualização dos destaques, não a bio. · Último movimento: Manu em 19/09 — olvgabrielamello a bio já está atualizada, já estava sem os emojis. O GitHub e o Theo que botaram esse monte de emojis maluco, mas Luiza já · Junto com: Luiza",
+   "d": "07/10"
+  },
+  {
+   "t": "ROB · Revitalização dos destaques (highlights) do perfil do Grupo ROB",
+   "c": "cs-rob-food#14",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/14",
+   "tag": "ROB",
+   "n": "As artes estão muito boas. Depende da Manu terminar o direcionamento de cada tela. · Último movimento: Luiza em 30/09 — dev-manoela Manu, to esperando o briefing geral das narrativas para eu criar o briefing desses destaques pf · Junto com: Luiza",
+   "d": "09/10",
+   "p": "P2"
+  },
+  {
+   "t": "TMK · Lapa · Panfleto de pedidos · Briefing + Design",
+   "c": "TMK#200",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/200",
+   "tag": "TMK",
+   "n": "Panfleto de pedidos da Lapa: data movida no handoff de 01/10. · Sem comentário no card. · Junto com: Manu",
+   "d": "20/10"
+  }
+ ],
+ "novidades": [
+  {
+   "t": "Carrossel da grade semanal da Lang's · travado",
+   "c": "cs-langs#49",
+   "u": "https://github.com/dev-seven7/cs-langs/issues/49",
+   "tag": "LANGS",
+   "n": "O Anderson não responde. Dia 05/10 é a data para entender o que fazer com isso, não para entregar."
+  },
+  {
+   "t": "Giveaway da Lapa · esperando data de inauguração",
+   "c": "TMK#218",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/218",
+   "tag": "TMK",
+   "n": "Revisar por volta de 20/10. A Lapa ainda não tem data de inauguração."
+  }
+ ],
+ "vencendo": [],
+ "atrasados": [
+  {
+   "t": "TMK · Cardápio TMK",
+   "c": "TMK#239",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/239",
+   "tag": "TMK",
+   "n": "Último movimento: Gabi em 28/09 — joaovseven7 , você vai gerar as fotos acima na mesma conversa em que você gerou as outras fotos e enviou. Dessa forma, eles vão ficar no mes",
+   "d": "29/09",
+   "p": "P0"
+  },
+  {
+   "t": "ROB · Criativos dos anúncios de tráfego (João/estáticos + Luiza/vídeos)",
+   "c": "cs-rob-food#67",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/67",
+   "tag": "ROB",
+   "n": "Último movimento: Manu em 30/09 — luizamenesesseven7 joaovseven7 atenção aos comentários acima, editei as duas: em vez de falar de investimento (aporte de R$ 300 mil, R$ 700 · Junto com: Luiza",
+   "d": "15/09",
+   "p": "P1"
+  },
+  {
+   "t": "LANGS · Carrossel - Grade Semanal · Criativo da grade de dias fixos",
+   "c": "cs-langs#49",
+   "u": "https://github.com/dev-seven7/cs-langs/issues/49",
+   "tag": "LANGS",
+   "n": "Último movimento: Manu em 19/09 — joaovseven7 essa demanda seria referente às promoções fixas da semana da Langs, acredito eu, tá? Eu vou até marcar olvgabrielamello aqui par",
+   "d": "30/09",
+   "p": "P1"
+  },
+  {
+   "t": "OLV · Calendário Novembro · Aniversário 9 anos, Black Friday, Cyber Monday, Cabo Frio e Niterói",
+   "c": "cs-olivers#240",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/240",
+   "tag": "OLV",
+   "n": "Sem comentário no card. · Junto com: Manu, Gabi, Luiza, Otávio",
+   "d": "23/10",
+   "p": "P1"
+  },
+  {
+   "t": "OLV · Aniversário 9 anos · 01 a 09/11 · ticket premiado + envelopes no salão + imprensa",
+   "c": "cs-olivers#241",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/241",
+   "tag": "OLV",
+   "n": "Sem comentário no card. · Junto com: Manu, Gabi, Luiza, Otávio",
+   "d": "23/10",
+   "p": "P1"
+  },
+  {
+   "t": "OLV · Filme O Gatola da Cartola · caixa do filme + flyers + comunicação",
+   "c": "cs-olivers#242",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/242",
+   "tag": "OLV",
+   "n": "Sem comentário no card. · Junto com: Manu, Gabi, Luiza, Otávio",
+   "d": "23/10",
+   "p": "P1"
+  },
+  {
+   "t": "OLV · Calendário Dezembro · Natal com Coca-Cola, pizza sazonal e aniversários de Niterói e Copa",
+   "c": "cs-olivers#243",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/243",
+   "tag": "OLV",
+   "n": "Sem comentário no card. · Junto com: Manu, Gabi, Luiza, Otávio",
+   "d": "20/11",
+   "p": "P2"
+  },
+  {
+   "t": "TMK · Lapa · Giveaway de inauguração · Briefing + Design",
+   "c": "TMK#218",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/218",
+   "tag": "TMK",
+   "n": "Sem comentário no card. · Junto com: Manu",
+   "d": "05/09"
+  },
+  {
+   "t": "[CONTEÚDO] - Artes para instagram da Rajah",
+   "c": "cs-rajah#4",
+   "u": "https://github.com/dev-seven7/cs-rajah/issues/4",
+   "tag": "RAJAH",
+   "n": "Último movimento: Gabi em 11/09 — Otavioseven7 joaovseven7 isso esta check? concluir como done e fechar a issue caso tenha terminado, me atualizem pf · Junto com: Otávio",
+   "d": "30/09"
+  }
+ ],
+ "mencoes": [
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "01/10",
+   "t": "TMK · Araruama · Editar criativos · Lançamento Temakeria",
+   "c": "TMK#230",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/230",
+   "n": "🎟️ Cupons de Araruama · criados e confirmados (30/09) @dev-manoela @joaovseven7 @luizamenesesseven7 @Otavioseven7 Resposta da Lini no Sults. Os dois cupons já estão criados e "
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "01/10",
+   "t": "TMK · Araruama · Landing de captação + CRM + cupons (hot roll isca + 1ª compra)",
+   "c": "TMK#16",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/16",
+   "n": "🎟️ Cupons de Araruama · criados e confirmados (30/09) @dev-manoela @joaovseven7 @luizamenesesseven7 @Otavioseven7 Resposta da Lini no Sults. Os dois cupons já estão criados e "
+  },
+  {
+   "g": "ciencia",
+   "q": "Manu",
+   "d": "30/09",
+   "t": "ROB · Criativos dos anúncios de tráfego (João/estáticos + Luiza/vídeos)",
+   "c": "cs-rob-food#67",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/67",
+   "n": "@luizamenesesseven7 @joaovseven7 atenção aos comentários acima, editei as duas: em vez de falar de investimento (aporte de R$ 300 mil, R$ 700 mil), agora falamos de faturament"
+  },
+  {
+   "g": "ciencia",
+   "q": "Luiza",
+   "d": "30/09",
+   "t": "OLV · Setembro · Att comunicação Rodízio + Reservas (benefício estendido)",
+   "c": "cs-olivers#203",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/203",
+   "n": "@joaovseven7 briefing do destaque VALOR ESPECIAL (rodízio) Capa do destaque RODÍZIO ØLIVER'S (subheadline, letra mais fina) VALOR ESPECIAL (headline, destaque) Tela de dentro "
+  },
+  {
+   "g": "ciencia",
+   "q": "Luiza",
+   "d": "30/09",
+   "t": "OLV · Revitalização Destaques Rodízio + À La Carte",
+   "c": "cs-olivers#105",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/105",
+   "n": "@joaovseven7 além do que você já entregou hoje, faltam 2 destaques novos: 1. À LA CARTE (briefing aqui no corpo da issue) - Capa do destaque - Telas de dentro: capa · pizzas s"
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "30/09",
+   "t": "OLV · Pulseira Rodízio + Roleta de Mesa",
+   "c": "cs-olivers#144",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/144",
+   "n": "@joaovseven7 @olvgabrielamello 📍 Call Gabi × Clarissa · 29/09/2026 · o projeto voltou, agora com ok pra fazer. - Roleta de mesa: 1 por mesa (não por pessoa), com 3 posições: d"
+  },
+  {
+   "g": "ciencia",
+   "q": "Luiza",
+   "d": "30/09",
+   "t": "TMK · Araruama · Tagline dos Instagrams RJ e SP (Araruama, SG, Lapa)",
+   "c": "TMK#17",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/17",
+   "n": "Vamos precisar dos destaques novos - HORÁRIOS - ENDEREÇO - DELIVERY Precisamos revitalizar a capa dos destaques e os destaques em si, estão bem desatualizados! BRIEFING: DESTA"
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "28/09",
+   "t": "TMK · Cardápio TMK",
+   "c": "TMK#239",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/239",
+   "n": "@joaovseven7 , você vai gerar as fotos acima na mesma conversa em que você gerou as outras fotos e enviou. Dessa forma, eles vão ficar no mesmo padrão das outras fotos que voc"
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "24/09",
+   "t": "OGRO · Estratégia · SWOT + plano de conteúdo foco produto (food porn, bastidores, séries",
+   "c": "cs-ogro-steaks#8",
+   "u": "https://github.com/dev-seven7/cs-ogro-steaks/issues/8",
+   "n": "🔄 Mudança de plano · a gravação de amanhã vira captação na operação · Plano B @dev-manoela @luizamenesesseven7 @Otavioseven7 @joaovseven7 O Jimmy e o Igor desmarcaram amanhã ("
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "22/09",
+   "t": "OLV · Piratininga / Região Oceânica (Michelle) · lançamento da unidade · onboarding pres",
+   "c": "cs-olivers#229",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/229",
+   "n": "🎨 Projeto visual da unidade · o que é pra fazer agora e o que é pra depois @joaovseven7 @dev-manoela O que a gente tem que fazer: o projeto visual das 4 peças da fachada da Øl"
+  },
+  {
+   "g": "entrega",
+   "q": "Otávio",
+   "d": "22/09",
+   "t": "TMK · Calendário Setembro · Temakeria",
+   "c": "TMK#228",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/228",
+   "n": "@joaovseven7 Segue o briefing para a edição do post compartilhável da semana que vem: Entregar até 28/09: [link]"
+  },
+  {
+   "g": "pergunta",
+   "q": "Manu",
+   "d": "19/09",
+   "t": "LANGS · Carrossel - Grade Semanal · Criativo da grade de dias fixos",
+   "c": "cs-langs#49",
+   "u": "https://github.com/dev-seven7/cs-langs/issues/49",
+   "n": "@joaovseven7 essa demanda seria referente às promoções fixas da semana da Langs, acredito eu, tá? Eu vou até marcar @olvgabrielamello aqui para a gente confirmar isso, mas acr"
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "18/09",
+   "t": "OGRO · Destaques + Bio do Instagram · atualização",
+   "c": "cs-ogro-steaks#13",
+   "u": "https://github.com/dev-seven7/cs-ogro-steaks/issues/13",
+   "n": "@dev-manoela: Não adorei, entendo que @joaovseven7 fez otimo trabalho mantendo na estetica do lettering da marca, mas visualizo algo mais virado em icones do jimmy comendo bur"
+  },
+  {
+   "g": "ciencia",
+   "q": "Manu",
+   "d": "17/09",
+   "t": "ROB · Campanha Expansão ROB/OLV e marcas",
+   "c": "cs-rob-food#26",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/26",
+   "n": "➕ Duas peças de impressão da Expansão (14/09) Chegou solicitação de impressão de dois criativos do Grupo ROB. Fica aqui na campanha-mãe da Expansão em vez de virar card novo ("
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "15/09",
+   "t": "TMK · Campanha cruzada com Øliver's · degustação + panfleto/cupom em São Gonçalo",
+   "c": "TMK#39",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/39",
+   "n": "🔀 Unificação · 59 absorvida nesta campanha (14/09/2026) Por decisão da Gabi, a 59 · Panfleto TMK (campanha cruzada OLV) e esta 39 eram a mesma campanha. A 59 foi fechada como "
+  },
+  {
+   "g": "pergunta",
+   "q": "Manu",
+   "d": "12/09",
+   "t": "MULTI · iFood Setembro · Øliver's + Ogro",
+   "c": "governance-s7#78",
+   "u": "https://github.com/dev-seven7/governance-s7/issues/78",
+   "n": "O vídeo da Ogro já foi aprovado, já está veiculando no iFood. O vídeo da Øliver's está em alteração com @joaovseven7. @joaovseven7 como está o andamento? Precisamos desse cont"
+  },
+  {
+   "g": "pergunta",
+   "q": "Gabi",
+   "d": "11/09",
+   "t": "[CONTEÚDO] - Artes para instagram da Rajah",
+   "c": "cs-rajah#4",
+   "u": "https://github.com/dev-seven7/cs-rajah/issues/4",
+   "n": "@Otavioseven7 @joaovseven7 isso esta check? concluir como done e fechar a issue caso tenha terminado, me atualizem pf"
+  },
+  {
+   "g": "ciencia",
+   "q": "Manu",
+   "d": "10/09",
+   "t": "TMK · Araruama · Brindes + impressos (imã QR, imã 3D, flyer de carro, kit sushi)",
+   "c": "TMK#13",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/13",
+   "n": "@joaovseven7 precisamos com prioridade dessa arte do ímã amanhã, precisamos enviar ao franqueado!!!"
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "09/09",
+   "t": "OLV · Campanha Torta de Limão",
+   "c": "cs-olivers#39",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/39",
+   "n": "🗂️ Consolidação de 08/09/2026 · o que fechou e o que estava acontecendo dentro de cada card Nove sub-issues foram canceladas (não concluídas) e o conteúdo delas subiu pro text"
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "09/09",
+   "t": "LANGS · Cardápio & Produto · Novidades - setembro a dezembro",
+   "c": "cs-langs#40",
+   "u": "https://github.com/dev-seven7/cs-langs/issues/40",
+   "n": "📥 Absorvido de 53 — Hambúrguer de setembro · Catupimenta A Gabi comentou na 53, dizendo: \"Tarefa com o time todo dentro: Gabi, Manu, João, Luisa, Otávio e Thiago. Status In pr"
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "08/09",
+   "t": "TMK · Lapa · Plano de Lançamento (pré-inauguração + inauguração + 3 meses)",
+   "c": "TMK#46",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/46",
+   "n": "🗂️ Comentários compilados das issues fechadas (consolidação de 08/09/2026) Registro de tudo que foi comentado nas sub-issues desta campanha antes de elas serem fechadas e vira"
+  },
+  {
+   "g": "ciencia",
+   "q": "Thiago",
+   "d": "07/09",
+   "t": "S7 · Carga e prioridade · ninguém está voando, todo mundo está soterrado (WIP 69 no pico",
+   "c": "governance-s7#58",
+   "u": "https://github.com/dev-seven7/governance-s7/issues/58",
+   "n": "Medição de 07/09 · a carga real por pessoa Auditoria completa do board. Carga em cards abertos, com \"ativo\" = Ready, In progress, In review ou Attention: | pessoa | total | at"
+  },
+  {
+   "g": "ciencia",
+   "q": "Gabi",
+   "d": "03/09",
+   "t": "OLV · Copa Rio (Super Vôlei) · Øliver's · Operação + campanha (24, 25 e 26/09)",
+   "c": "cs-olivers#15",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/15",
+   "n": "@joaovseven7"
+  },
+  {
+   "g": "ciencia",
+   "q": "Otávio",
+   "d": "01/09",
+   "t": "TMK · Artes para o instagram - Setembro - Ficou com Lorenna, João dá o check",
+   "c": "TMK#217",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/217",
+   "n": "@joaovseven7 Atualizei aqui com as artes para o mês todo :)"
+  }
+ ],
+ "checks": [
+  {
+   "bloco": "Entregues ou fora da esteira do João",
+   "emoji": "✅",
+   "itens": [
+    {
+     "t": "OLV · Pulseira Rodízio + Roleta de Mesa",
+     "c": "cs-olivers#144",
+     "u": "https://github.com/dev-seven7/cs-olivers/issues/144",
+     "n": "entrega prevista entre 09 e 13/10, não está atrasada"
+    },
+    {
+     "t": "TMK · Araruama · Brindes + impressos (imã QR, imã 3D, flyer de carro, kit sushi)",
+     "c": "TMK#13",
+     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/13",
+     "n": "entregue"
+    },
+    {
+     "t": "TMK · GATE · Reprecificação + cardápio novo ·",
+     "c": "TMK#187",
+     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/187",
+     "n": "concluído"
+    },
+    {
+     "t": "TMK · Campanha cruzada com Øliver's · degustação + panfleto/cupom em São Gonçalo",
+     "c": "TMK#39",
+     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/39",
+     "n": "já está rodando, o panfleto também foi feito"
+    },
+    {
+     "t": "🎨 🏢 ROB · Multi-marca · Artes de material impresso e uniforme para franqueados",
+     "c": "cs-rob-food#115",
+     "u": "https://github.com/dev-seven7/cs-rob-food/issues/115",
+     "n": "entregue e validado"
+    },
+    {
+     "t": "TMK · Araruama · Giveaway de inauguracao · Briefing + Design",
+     "c": "TMK#127",
+     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/127",
+     "n": "entregue"
+    },
+    {
+     "t": "TMK · Rebranding da marca · logo v2.0 e identidade",
+     "c": "TMK#7",
+     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/7",
+     "n": "sai da esteira do João, não vai ser feito por ele"
+    },
+    {
+     "t": "TMK · Lapa · Landing de captação · Briefing + Design",
+     "c": "TMK#193",
+     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/193",
+     "n": "check, sai da esteira do João"
+    },
+    {
+     "t": "OLV · Matheus · Cartão de confirmação de reservas",
+     "c": "cs-olivers#106",
+     "u": "https://github.com/dev-seven7/cs-olivers/issues/106",
+     "n": "passa para a Manu, sem urgência, prioridade para os próximos meses"
+    },
+    {
+     "t": "ROB · Comercial · Apresentações de venda · padronizar Ogro + criar Temaqueria",
+     "c": "cs-rob-food#4",
+     "u": "https://github.com/dev-seven7/cs-rob-food/issues/4",
+     "n": "sai dos atrasados (handoff de 01/10)"
+    },
+    {
+     "t": "OLV · Piratininga / Região Oceânica (Michelle) · lançamento da unidade · onboarding presencial 25/09 + cronograma de 20 a 22 dias",
+     "c": "cs-olivers#229",
+     "u": "https://github.com/dev-seven7/cs-olivers/issues/229",
+     "n": "resolvido: a fachada passou para o arquiteto"
+    },
+    {
+     "t": "TMK · Artes para o instagram - Setembro - Ficou com Lorenna, João dá o check",
+     "c": "TMK#217",
+     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/217",
+     "n": "ficou com a Lorenna"
+    },
+    {
+     "t": "governance-s7#78",
+     "c": "governance-s7#78",
+     "u": "https://github.com/dev-seven7/governance-s7/issues/78",
+     "n": "iFood de setembro já entregue, check"
+    },
+    {
+     "t": "Ogro Steaks · Onboarding (full service)",
+     "c": "cs-ogro-steaks#1",
+     "u": "https://github.com/dev-seven7/cs-ogro-steaks/issues/1",
+     "n": "sai dos atrasados: fica só como ciência dele, sem cobrança"
+    }
+   ]
+  }
+ ],
+ "feito": [
+  {
+   "d": "30/09",
+   "t": "Giveaway de inauguração de Araruama · entregue",
+   "c": "TMK#127",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/127"
+  },
+  {
+   "d": "30/09",
+   "t": "Brindes e impressos de Araruama · entregues",
+   "c": "TMK#13",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/13"
+  },
+  {
+   "d": "30/09",
+   "t": "GATE de reprecificação e cardápio novo · concluído",
+   "c": "TMK#187",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/187"
+  },
+  {
+   "d": "30/09",
+   "t": "Campanha cruzada com a Øliver's · rodando, panfleto feito",
+   "c": "TMK#39",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/39"
+  },
+  {
+   "d": "30/09",
+   "t": "Artes de impresso e uniforme para franqueados · entregues e validadas",
+   "c": "cs-rob-food#115",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/115"
+  },
+  {
+   "d": "30/09",
+   "t": "Destaques do rodízio · parte do rodízio concluída",
+   "c": "cs-olivers#105",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/105"
+  },
+  {
+   "d": "30/09",
+   "t": "Artes de setembro da ROB e da Lang's · entregues",
+   "c": "cs-rob-food#75",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/75"
+  },
+  {
+   "d": "23/09",
+   "t": "Bag do motoboy e uniforme da Temakeria entregues no Sults",
+   "c": "cs-rob-food#115",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/115"
+  },
+  {
+   "d": "23/09",
+   "t": "Fotos dos combos do cardápio",
+   "c": "TMK#150",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/150"
+  }
+ ]
+};
+</script>
+<script>
+const $ = (s)=>document.querySelector(s);
+const esc = (s)=>String(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const ref = (c,u)=> !c ? "" : (u ? `<a class="ref" href="${u}" target="_blank">${esc(c)}</a>` : `<span class="ref off">${esc(c)}</span>`);
+
+function chave(t){ return "dg:"+t.slice(0,60); }
+function marcado(t){ try{ return localStorage.getItem(chave(t))==="1" }catch(e){ return false } }
+function marcar(t,v){ try{ localStorage.setItem(chave(t), v?"1":"0") }catch(e){} }
+
+function cardHTML(o, opts={}){
+  const id = chave(o.t);
+  const done = marcado(o.t);
+  const meta = [
+    o.p ? `<span class="badge ${o.p}">${o.p}</span>` : "",
+    o.d ? `<span class="data">${esc(o.d)}</span>` : "",
+    o.q ? `<span class="quem">${esc(o.q)}</span>` : "",
+    ref(o.c,o.u),
+    o.tag ? `<span class="tag">${esc(o.tag)}</span>` : ""
+  ].filter(Boolean).join("");
+  return `<div class="card ${opts.urgente?"urgente":""} ${done?"done":""}" data-tag="${o.tag||""}" data-p="${o.p||""}">
+    <input type="checkbox" class="chk" data-key="${esc(id)}" ${done?"checked":""} onchange="toggle(this)">
+    <div class="body">
+      <div class="t">${esc(o.t)}</div>
+      ${o.n?`<div class="n">${esc(o.n)}</div>`:""}
+      <div class="meta">${meta}</div>
+    </div>
+  </div>`;
+}
+
+function toggle(el){
+  const id = el.dataset.key;
+  try{ localStorage.setItem(id, el.checked?"1":"0") }catch(e){}
+  renderCards();
+  atualizaProgresso();
+}
+
+function itemHTML(o){
+  const id = chave(o.t), done = marcado(o.t);
+  return `<div class="item ${done?"done":""}">
+    <input type="checkbox" class="chk" ${done?"checked":""} onchange="toggle(this,'${id}')">
+    <div class="body">
+      <div class="t">${esc(o.t)}</div>
+      ${o.n?`<div class="n">${esc(o.n)}</div>`:""}
+      ${o.c?`<div class="meta">${ref(o.c,o.u)}</div>`:""}
+    </div>
+  </div>`;
+}
+
+function atualizaProgresso(){
+  document.querySelectorAll(".bloco").forEach(b=>{
+    const tot = b.querySelectorAll(".item").length;
+    const ok = b.querySelectorAll(".item.done").length;
+    const el = b.querySelector(".prog");
+    if(el) el.textContent = ok+"/"+tot;
+  });
+}
+
+function irPara(id){ document.getElementById(id).scrollIntoView({behavior:"smooth"}); }
+
+// ---- render
+document.title = (DADOS.titulo||"Daily").replace(/[^\p{L}\s·]/gu,"").trim() + " · Seven7";
+$("#titulo").textContent = DADOS.titulo || "Daily";
+$("#sub").textContent = (DADOS.subtitulo? DADOS.subtitulo+" · " : "") + "Atualizado em " + DADOS.atualizado;
+$("#k4label").textContent = DADOS.labelChecks || "checks";
+$("#tit-chk").textContent = DADOS.tituloChecks || "✅ Checks";
+$("#nota-chk").innerHTML = DADOS.notaChecks || "";
+$("#rodape").textContent = DADOS.atualizado;
+$("#k1").textContent = DADOS.atrasados.length;
+$("#k2").textContent = DADOS.vencendo.length;
+$("#k3").textContent = DADOS.mencoes.length;
+$("#k4").textContent = DADOS.resumo.checks;
+$("#c-venc").textContent = DADOS.vencendo.length + " cards";
+$("#c-atr").textContent = DADOS.atrasados.length + " cards";
+$("#c-men").textContent = DADOS.mencoes.length + " pessoas";
+$("#c-chk").textContent = DADOS.resumo.checks + " abertos";
+
+if(DADOS.ajustes){
+  document.getElementById("ajustes").style.display="";
+  $("#tit-aj").textContent = DADOS.ajustes.titulo;
+  $("#nota-aj").textContent = DADOS.ajustes.nota || "";
+  $("#lista-ajustes").innerHTML = `<details class="bloco" open><summary>Checklist da revisão <span class="prog">0/${DADOS.ajustes.itens.length}</span></summary><div class="itens">${DADOS.ajustes.itens.map(itemHTML).join("")}</div></details>`;
+}
+if(DADOS.tituloNovidades) $("#tit-nov").textContent = DADOS.tituloNovidades;
+if(DADOS.notaNovidades) $("#nota-nov").textContent = DADOS.notaNovidades;
+
+const SECOES_CARD = [
+  {key:"hoje", sec:"hoje", vazio:"Nada pendente, dia fechado.", urgente:true, itens: (DADOS.hojeManual||[]).concat(DADOS.hoje||[])},
+  {key:"proximos", sec:"proximos", vazio:null, itens: DADOS.proximos||[]},
+  {key:"novidades", sec:"novidades", vazio:null, itens: DADOS.novidades||[]},
+  {key:"vencendo", sec:"vencendo", vazio:null, itens: DADOS.vencendo||[]},
+  {key:"atrasados", sec:"atrasados", vazio:null, itens: DADOS.atrasados||[]}
+];
+
+function renderCards(){
+  const concluidos = [];
+  SECOES_CARD.forEach(s=>{
+    const pendentes = s.itens.filter(o=>!marcado(o.t));
+    s.itens.filter(o=>marcado(o.t)).forEach(o=>concluidos.push(o));
+    const html = pendentes.map(o=>cardHTML(o,{urgente:s.urgente})).join("");
+    const el = document.getElementById("lista-"+s.key);
+    if(!el) return;
+    if(pendentes.length){ el.innerHTML = html; }
+    else if(s.vazio){ el.innerHTML = `<p class="nota">${s.vazio}</p>`; }
+    else { el.innerHTML = ""; }
+    const secEl = document.getElementById(s.sec);
+    if(secEl && s.vazio===null) secEl.style.display = (s.itens.length===0) ? "none" : "";
+    if(s.key==="proximos" && document.getElementById("c-prox")) $("#c-prox").textContent = pendentes.length + " cards";
+  });
+  $("#c-con").textContent = concluidos.length + " itens";
+  $("#lista-concluidos").innerHTML = concluidos.length
+    ? concluidos.map(o=>cardHTML(o)).join("")
+    : '<p class="nota">Nada concluído ainda.</p>';
+  $("#k1").textContent = SECOES_CARD.find(s=>s.key==="atrasados").itens.filter(o=>!marcado(o.t)).length;
+  $("#k2").textContent = SECOES_CARD.find(s=>s.key==="vencendo").itens.filter(o=>!marcado(o.t)).length;
+  $("#c-atr").textContent = SECOES_CARD.find(s=>s.key==="atrasados").itens.filter(o=>!marcado(o.t)).length + " cards";
+  $("#c-venc").textContent = SECOES_CARD.find(s=>s.key==="vencendo").itens.filter(o=>!marcado(o.t)).length + " cards";
+}
+renderCards();
+
+const grupos = {entrega:"Entregou e espera seu check", pergunta:"Fez uma pergunta direta", ciencia:"Só precisa da sua ciência"};
+$("#lista-mencoes").innerHTML = Object.keys(grupos).map(g=>{
+  const itens = DADOS.mencoes.filter(m=>m.g===g);
+  if(!itens.length) return "";
+  return `<details class="bloco" open><summary>${grupos[g]} <span class="prog">0/${itens.length}</span></summary>
+    <div class="itens">${itens.map(o=>itemHTML({...o, c:o.c, u:o.u, n:(o.q?o.q+" · "+o.d+" · ":"")+(o.n||"")})).join("")}</div></details>`;
+}).join("");
+
+$("#lista-checks").innerHTML = DADOS.checks.map(b=>
+  `<details class="bloco"><summary>${b.emoji||""} ${esc(b.bloco)} <span class="prog">0/${b.itens.length}</span></summary>
+   <div class="itens">${b.itens.map(itemHTML).join("")}</div></details>`).join("");
+
+$("#lista-feito").innerHTML = DADOS.feito.map(f=>
+  `<div class="l"><b>✓</b><span>${esc(f.d)}</span><span style="flex:1">${esc(f.t)} ${ref(f.c,f.u)}</span></div>`).join("");
+
+// filtros por marca
+const tags = [...new Set(DADOS.atrasados.map(a=>a.tag))];
+$("#filtros").innerHTML = [`<span class="f on" data-f="">Tudo</span>`]
+  .concat(tags.map(t=>`<span class="f" data-f="${t}">${t}</span>`))
+  .concat([`<span class="f" data-f="P0">só P0</span>`]).join("");
+$("#filtros").addEventListener("click", e=>{
+  if(!e.target.classList.contains("f")) return;
+  document.querySelectorAll("#filtros .f").forEach(f=>f.classList.remove("on"));
+  e.target.classList.add("on");
+  const f = e.target.dataset.f;
+  document.querySelectorAll("#lista-atrasados .card").forEach(c=>{
+    const ok = !f || c.dataset.tag===f || c.dataset.p===f;
+    c.style.display = ok ? "" : "none";
+  });
+});
+
+["mencoes","checks","feito"].forEach(id=>{ /* esconde-vazias */
+  const sec=document.getElementById(id); if(!sec) return;
+  if(!sec.querySelector(".card,.item,.l")) sec.style.display="none";
+});
+atualizaProgresso();
+</script>
+</body>
+</html>
