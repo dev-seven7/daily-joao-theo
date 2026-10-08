@@ -120,6 +120,11 @@
     <div id="lista-hoje"></div>
   </section>
 
+  <section id="amanha">
+    <h2>🟡 Para entregar amanhã</h2>
+    <div id="lista-amanha"></div>
+  </section>
+
   <section id="ajustes" style="display:none">
     <h2><span id="tit-aj"></span></h2>
     <p class="nota" id="nota-aj"></p>
@@ -127,7 +132,7 @@
   </section>
 
   <section id="proximos">
-    <h2>🟠 Próximos dias <span class="count" id="c-prox"></span></h2>
+    <h2>🟠 Próxima semana · 12 a 16/10 <span class="count" id="c-prox"></span></h2>
     <div id="lista-proximos"></div>
   </section>
 
@@ -181,7 +186,7 @@
 /* dados embutidos: evita cache do arquivo externo */
 // Daily do João · dados atualizados a cada check do dia
 const DADOS = {
- "atualizado": "01/10/2026 · 14h",
+ "atualizado": "08/10/2026",
  "titulo": "🎨 Daily do João",
  "subtitulo": "Design e criativos · Seven7",
  "labelChecks": "revisados",
@@ -195,32 +200,46 @@ const DADOS = {
  },
  "hojeManual": [
   {
-   "t": "Terminar o cardápio da Temakeria · falta só as bebidas",
-   "c": "TMK#239",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/239",
-   "tag": "TMK",
-   "n": "É a última parte: as bebidas. O resto do cardápio já está fechado."
-  },
-  {
-   "t": "Criar a caixa do Gatola na Cartola",
-   "c": "cs-olivers#244",
-   "u": "https://github.com/dev-seven7/cs-olivers/issues/244",
-   "tag": "OLV",
-   "n": "Caixa padrão, interativa, para a criança pintar: metade colorida, metade para colorir. Referência no Drive do card. Entrega amanhã até meio-dia, com janela de ajuste até as 16h."
-  },
-  {
-   "t": "Ads do Grupo ROB · aplicar os ajustes da Gabi",
+   "t": "Ajustes nos ads do Grupo ROB (Gabi já revisou)",
    "c": "cs-rob-food#67",
    "u": "https://github.com/dev-seven7/cs-rob-food/issues/67",
    "tag": "ROB",
-   "n": "Ler os comentários da Gabi e conferir antes de aplicar. A Manu já editou as duas peças nos comentários."
+   "n": ""
   },
   {
    "t": "Dar um check em todas as suas marcações no GitHub",
    "c": "",
    "u": "",
-   "tag": "GERAL",
-   "n": "Você tem menções acumuladas esperando resposta. Passar uma vez por todas e responder o que estiver parado."
+   "tag": "S7",
+   "n": ""
+  },
+  {
+   "t": "LANGS · Arte do papel de bandeja (venceu ontem, 07/10)",
+   "c": "cs-langs#57",
+   "u": "https://github.com/dev-seven7/cs-langs/issues/57",
+   "tag": "LANGS",
+   "n": ""
+  },
+  {
+   "t": "OLV · Revitalização Destaques Rodízio + À La Carte (venceu ontem, 07/10)",
+   "c": "cs-olivers#105",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/105",
+   "tag": "OLV",
+   "n": ""
+  },
+  {
+   "t": "OGRO · Destaques + Bio do Instagram (venceu ontem, 07/10)",
+   "c": "cs-ogro-steaks#13",
+   "u": "https://github.com/dev-seven7/cs-ogro-steaks/issues/13",
+   "tag": "OGRO",
+   "n": ""
+  },
+  {
+   "t": "Fotos dos 15 combos promocionais do iFood",
+   "c": "cs-rob-food#123",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/123",
+   "tag": "ROB",
+   "n": "Campanha sobe amanhã, 09/10."
   }
  ],
  "hoje": [],
@@ -228,87 +247,25 @@ const DADOS = {
  "notaNovidades": "Não é para entregar agora: depende de resposta de terceiro ou de data que ainda não existe.",
  "proximos": [
   {
-   "t": "Criar os 3 estáticos de TOPO de funil da Temakeria",
-   "c": "TMK#230",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/230",
-   "tag": "TMK",
-   "d": "02/10",
-   "n": "Marca da Temakeria Universitária, produtos crus e posicionamento. Os de meio e fundo (incluindo o de cupom) começam na sequência, para entrega em 05/10. Cupons confirmados: TMKARARUAMA (10%, mínimo R$ 75) e PRESENTEARARUAMA (Big Hot grátis, mínimo R$ 75), e o mínimo precisa aparecer na peça."
-  },
-  {
-   "t": "Caixa do Gatola · entrega até meio-dia, ajuste até as 16h",
-   "c": "cs-olivers#244",
-   "u": "https://github.com/dev-seven7/cs-olivers/issues/244",
+   "t": "Aniversário 9 anos Øliver's · comunicação visual do ticket premiado",
+   "c": "cs-olivers#241",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/241",
    "tag": "OLV",
-   "d": "02/10",
-   "n": "O prazo das 16h fecha a entrega para a distribuidora."
+   "n": "Campanha começa 01/11, precisa de lead time antes de você sair (18/10)."
   },
   {
-   "t": "Check final dos criativos do Grupo ROB",
+   "t": "~10 estáticos novos de tráfego do Grupo ROB",
    "c": "cs-rob-food#67",
    "u": "https://github.com/dev-seven7/cs-rob-food/issues/67",
    "tag": "ROB",
-   "d": "02/10",
-   "n": "Conferir o comentário e o feedback da Gabi e seguir aquele texto e aquela copy."
+   "n": "Volume grande, começar essa semana."
   },
   {
-   "t": "Check nas demandas de social dos canais",
-   "c": "",
-   "u": "",
-   "tag": "GERAL",
-   "d": "02/10",
-   "n": "Passar nas demandas de social dos canais e confirmar que está tudo certo."
-  },
-  {
-   "t": "Destaques novos do Instagram da Temakeria",
-   "c": "TMK#17",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/17",
-   "tag": "TMK",
-   "d": "07/10",
-   "n": "Capa dos destaques e os destaques de HORÁRIOS, ENDEREÇO e DELIVERY. Tem que estar no ar pelo menos 2 dias antes da inauguração de Araruama, que é 09/10. ⚠️ Você ainda não é assignee desse card no GitHub."
-  },
-  {
-   "t": "OLV · Revitalização Destaques Rodízio + À La Carte",
-   "c": "cs-olivers#105",
-   "u": "https://github.com/dev-seven7/cs-olivers/issues/105",
+   "t": "Peças do Gatola da Cartola + calendário de dezembro",
+   "c": "cs-olivers#242",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/242",
    "tag": "OLV",
-   "n": "Rodízio feito. Falta a À La Carte e o destaque VALOR ESPECIAL do rodízio, com briefing em cs-olivers#203. · Último movimento: Luiza em 30/09 — joaovseven7 além do que você já entregou hoje, faltam 2 destaques novos: 1. À LA CARTE (briefing aqui no corpo da issue) - Capa do destaque · Junto com: Luiza",
-   "d": "07/10",
-   "p": "P1"
-  },
-  {
-   "t": "LANGS · Cardápio · Arte do papel de bandeja (salão) · Briefing + Design",
-   "c": "cs-langs#57",
-   "u": "https://github.com/dev-seven7/cs-langs/issues/57",
-   "tag": "LANGS",
-   "n": "Confirmado com o Anderson: vai ser feito. Levar 3 versões para ele aprovar. · Último movimento: Manu em 19/09 — Então, João, eu já perguntei para Anderson sobre essa demanda se ainda está de pé. Ele não nos respondeu, mas, de qualquer forma, é uma dema · Junto com: Manu",
-   "d": "07/10",
-   "p": "P1"
-  },
-  {
-   "t": "OGRO · Destaques + Bio do Instagram · atualização",
-   "c": "cs-ogro-steaks#13",
-   "u": "https://github.com/dev-seven7/cs-ogro-steaks/issues/13",
-   "tag": "OGRO",
-   "n": "É só a atualização dos destaques, não a bio. · Último movimento: Manu em 19/09 — olvgabrielamello a bio já está atualizada, já estava sem os emojis. O GitHub e o Theo que botaram esse monte de emojis maluco, mas Luiza já · Junto com: Luiza",
-   "d": "07/10"
-  },
-  {
-   "t": "ROB · Revitalização dos destaques (highlights) do perfil do Grupo ROB",
-   "c": "cs-rob-food#14",
-   "u": "https://github.com/dev-seven7/cs-rob-food/issues/14",
-   "tag": "ROB",
-   "n": "As artes estão muito boas. Depende da Manu terminar o direcionamento de cada tela. · Último movimento: Luiza em 30/09 — dev-manoela Manu, to esperando o briefing geral das narrativas para eu criar o briefing desses destaques pf · Junto com: Luiza",
-   "d": "09/10",
-   "p": "P2"
-  },
-  {
-   "t": "TMK · Lapa · Panfleto de pedidos · Briefing + Design",
-   "c": "TMK#200",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/200",
-   "tag": "TMK",
-   "n": "Panfleto de pedidos da Lapa: data movida no handoff de 01/10. · Sem comentário no card. · Junto com: Manu",
-   "d": "20/10"
+   "n": "Lançamento do filme é 05/11, preparar com antecedência."
   }
  ],
  "novidades": [
@@ -317,95 +274,24 @@ const DADOS = {
    "c": "cs-langs#49",
    "u": "https://github.com/dev-seven7/cs-langs/issues/49",
    "tag": "LANGS",
-   "n": "O Anderson não responde. Dia 05/10 é a data para entender o que fazer com isso, não para entregar."
+   "n": ""
   },
   {
    "t": "Giveaway da Lapa · esperando data de inauguração",
    "c": "TMK#218",
    "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/218",
    "tag": "TMK",
-   "n": "Revisar por volta de 20/10. A Lapa ainda não tem data de inauguração."
+   "n": ""
   }
  ],
  "vencendo": [],
  "atrasados": [
   {
-   "t": "TMK · Cardápio TMK",
-   "c": "TMK#239",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/239",
-   "tag": "TMK",
-   "n": "Último movimento: Gabi em 28/09 — joaovseven7 , você vai gerar as fotos acima na mesma conversa em que você gerou as outras fotos e enviou. Dessa forma, eles vão ficar no mes",
-   "d": "29/09",
-   "p": "P0"
-  },
-  {
-   "t": "ROB · Criativos dos anúncios de tráfego (João/estáticos + Luiza/vídeos)",
-   "c": "cs-rob-food#67",
-   "u": "https://github.com/dev-seven7/cs-rob-food/issues/67",
-   "tag": "ROB",
-   "n": "Último movimento: Manu em 30/09 — luizamenesesseven7 joaovseven7 atenção aos comentários acima, editei as duas: em vez de falar de investimento (aporte de R$ 300 mil, R$ 700 · Junto com: Luiza",
-   "d": "15/09",
-   "p": "P1"
-  },
-  {
-   "t": "LANGS · Carrossel - Grade Semanal · Criativo da grade de dias fixos",
-   "c": "cs-langs#49",
-   "u": "https://github.com/dev-seven7/cs-langs/issues/49",
-   "tag": "LANGS",
-   "n": "Último movimento: Manu em 19/09 — joaovseven7 essa demanda seria referente às promoções fixas da semana da Langs, acredito eu, tá? Eu vou até marcar olvgabrielamello aqui par",
-   "d": "30/09",
-   "p": "P1"
-  },
-  {
-   "t": "OLV · Calendário Novembro · Aniversário 9 anos, Black Friday, Cyber Monday, Cabo Frio e Niterói",
-   "c": "cs-olivers#240",
-   "u": "https://github.com/dev-seven7/cs-olivers/issues/240",
-   "tag": "OLV",
-   "n": "Sem comentário no card. · Junto com: Manu, Gabi, Luiza, Otávio",
-   "d": "23/10",
-   "p": "P1"
-  },
-  {
-   "t": "OLV · Aniversário 9 anos · 01 a 09/11 · ticket premiado + envelopes no salão + imprensa",
-   "c": "cs-olivers#241",
-   "u": "https://github.com/dev-seven7/cs-olivers/issues/241",
-   "tag": "OLV",
-   "n": "Sem comentário no card. · Junto com: Manu, Gabi, Luiza, Otávio",
-   "d": "23/10",
-   "p": "P1"
-  },
-  {
-   "t": "OLV · Filme O Gatola da Cartola · caixa do filme + flyers + comunicação",
-   "c": "cs-olivers#242",
-   "u": "https://github.com/dev-seven7/cs-olivers/issues/242",
-   "tag": "OLV",
-   "n": "Sem comentário no card. · Junto com: Manu, Gabi, Luiza, Otávio",
-   "d": "23/10",
-   "p": "P1"
-  },
-  {
-   "t": "OLV · Calendário Dezembro · Natal com Coca-Cola, pizza sazonal e aniversários de Niterói e Copa",
-   "c": "cs-olivers#243",
-   "u": "https://github.com/dev-seven7/cs-olivers/issues/243",
-   "tag": "OLV",
-   "n": "Sem comentário no card. · Junto com: Manu, Gabi, Luiza, Otávio",
-   "d": "20/11",
-   "p": "P2"
-  },
-  {
-   "t": "TMK · Lapa · Giveaway de inauguração · Briefing + Design",
-   "c": "TMK#218",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/218",
-   "tag": "TMK",
-   "n": "Sem comentário no card. · Junto com: Manu",
-   "d": "05/09"
-  },
-  {
-   "t": "[CONTEÚDO] - Artes para instagram da Rajah",
+   "t": "[CONTEÚDO] Artes para Instagram da Rajah",
    "c": "cs-rajah#4",
    "u": "https://github.com/dev-seven7/cs-rajah/issues/4",
    "tag": "RAJAH",
-   "n": "Último movimento: Gabi em 11/09 — Otavioseven7 joaovseven7 isso esta check? concluir como done e fechar a issue caso tenha terminado, me atualizem pf · Junto com: Otávio",
+   "n": "Backlog antigo, confirmar se ainda vale.",
    "d": "30/09"
   }
  ],
@@ -774,8 +660,31 @@ const DADOS = {
    "c": "TMK#150",
    "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/150"
   }
+ ],
+ "amanha": [
+  {
+   "t": "ROB · Revitalização dos destaques do perfil do Grupo ROB",
+   "c": "cs-rob-food#14",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/14",
+   "tag": "ROB",
+   "n": "Prazo final 09/10."
+  },
+  {
+   "t": "Finalizar as peças do Gatola da Cartola (panfleto, display, vídeo/motion, banner)",
+   "c": "cs-olivers#244",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/244",
+   "tag": "OLV",
+   "n": "Prazo final 09/10."
+  },
+  {
+   "t": "Check final nos criativos da Araruama antes da inauguração",
+   "c": "cs-temakeria-universitaria#230",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/230",
+   "tag": "TMK",
+   "n": "Inauguração é amanhã."
+  }
  ]
-};
+};;
 </script>
 <script>
 const $ = (s)=>document.querySelector(s);
@@ -864,6 +773,7 @@ if(DADOS.notaNovidades) $("#nota-nov").textContent = DADOS.notaNovidades;
 
 const SECOES_CARD = [
   {key:"hoje", sec:"hoje", vazio:"Nada pendente, dia fechado.", urgente:true, itens: (DADOS.hojeManual||[]).concat(DADOS.hoje||[])},
+  {key:"amanha", sec:"amanha", vazio:"Nada registrado ainda.", urgente:true, itens: DADOS.amanha||[]},
   {key:"proximos", sec:"proximos", vazio:null, itens: DADOS.proximos||[]},
   {key:"novidades", sec:"novidades", vazio:null, itens: DADOS.novidades||[]},
   {key:"vencendo", sec:"vencendo", vazio:null, itens: DADOS.vencendo||[]},
