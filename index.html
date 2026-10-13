@@ -120,7 +120,7 @@
     <div id="lista-hoje"></div>
   </section>
 
-  <section id="amanha">
+  <section id="amanha" style="display:none">
     <h2>🟡 Para entregar amanhã</h2>
     <div id="lista-amanha"></div>
   </section>
@@ -132,7 +132,7 @@
   </section>
 
   <section id="proximos">
-    <h2>🟠 Próxima semana · 12 a 16/10 <span class="count" id="c-prox"></span></h2>
+    <h2>🟠 Entregar ainda essa semana · até 15/10 <span class="count" id="c-prox"></span></h2>
     <div id="lista-proximos"></div>
   </section>
 
@@ -237,21 +237,21 @@ const DADOS = {
    "c": "cs-olivers#244",
    "u": "https://github.com/dev-seven7/cs-olivers/issues/244",
    "tag": "OLV",
-   "n": "A partir de amanhã (14/10), finalizar até quinta (15/10). Review presencial com a Manu em 14/10."
+   "n": "Finalizar até 15/10. Review presencial com a Manu em 14/10."
   },
   {
    "t": "2º · Artes de social das marcas",
    "c": "",
    "u": "",
    "tag": "S7",
-   "n": "A Luiza e o Otávio enviam os briefings. Finalizar até quinta (15/10)."
+   "n": "A Luiza e o Otávio enviam os briefings. Finalizar até 15/10."
   },
   {
    "t": "3º · Aniversário 9 anos Øliver's · comunicação visual do ticket premiado",
    "c": "cs-olivers#241",
    "u": "https://github.com/dev-seven7/cs-olivers/issues/241",
    "tag": "OLV",
-   "n": "Golden ticket de 9 anos, preto com dourado, na pegada do Black Ticket da Copa com a Coca-Cola. Referências e copy na issue. Finalizar até quinta (15/10)."
+   "n": "Golden ticket de 9 anos, preto com dourado, na pegada do Black Ticket da Copa com a Coca-Cola. Referências e copy na issue. Finalizar até 15/10."
   }
  ],
  "novidades": [
@@ -746,7 +746,7 @@ if(DADOS.notaNovidades) $("#nota-nov").textContent = DADOS.notaNovidades;
 
 const SECOES_CARD = [
   {key:"hoje", sec:"hoje", vazio:"Nada pendente, dia fechado.", urgente:true, itens: (DADOS.hojeManual||[]).concat(DADOS.hoje||[])},
-  {key:"amanha", sec:"amanha", vazio:"Nada registrado ainda.", urgente:true, itens: DADOS.amanha||[]},
+  {key:"amanha", sec:"amanha", vazio:null, urgente:true, itens: DADOS.amanha||[]},
   {key:"proximos", sec:"proximos", vazio:null, itens: DADOS.proximos||[]},
   {key:"novidades", sec:"novidades", vazio:null, itens: DADOS.novidades||[]},
   {key:"vencendo", sec:"vencendo", vazio:null, itens: DADOS.vencendo||[]},
