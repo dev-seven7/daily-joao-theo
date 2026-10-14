@@ -155,11 +155,11 @@
 
   <section id="mencoes">
     <h2>📨 Esperando você · check geral antes de encerrar <span class="count" id="c-men"></span></h2>
-    <p class="nota">Tudo em que a Manu, a Luiza, o Otávio e a Gabi te marcaram nos últimos 10 dias (04 a 14/10). Abre cada um, confere se ficou algo sem entregar ou sem resposta e dá o check.</p>
+    <p class="nota">O que a Manu, a Luiza e o Otávio te marcaram nos últimos 10 dias (04 a 14/10) e ainda está sem entrega. O que você já entregou está em Concluídos, lá embaixo.</p>
     <div id="lista-mencoes"></div>
   </section>
 
-  <section id="checks">
+  <section id="checks" style="display:none">
     <h2><span id="tit-chk">✅ Checks</span> <span class="count" id="c-chk"></span></h2>
     <p class="nota" id="nota-chk"></p>
     <div id="lista-checks"></div>
@@ -195,8 +195,8 @@ const DADOS = {
  "resumo": {
   "atrasados": 9,
   "vencendo": 10,
-  "mencoes": 32,
-  "checks": 14
+  "mencoes": 13,
+  "checks": 0
  },
  "hojeManual": [
   {
@@ -362,15 +362,6 @@ const DADOS = {
    "n": "🎟️ Referência do ticket premiado · 9 anos Øliver's A ideia é um golden ticket de 9 anos da Øliver's, preto com dourado, na mesma pegada do Black Ticket que a gente fez pr…"
   },
   {
-   "g": "luiza",
-   "q": "Luiza",
-   "d": "09/10",
-   "t": "OLV · Calendário Outubro · Øliver's",
-   "c": "cs-olivers#238",
-   "u": "https://github.com/dev-seven7/cs-olivers/issues/238#issuecomment-6089595997",
-   "n": ""
-  },
-  {
    "g": "manu",
    "q": "Manu",
    "d": "09/10",
@@ -389,15 +380,6 @@ const DADOS = {
    "n": "as fotos dos 6 destaques do Grupo ROB estão separadas desde 06/10 (comentário acima) e a narrativa tela a tela está no corpo da issue. Agora falta só a arte. Destaques: G…"
   },
   {
-   "g": "otavio",
-   "q": "Otávio",
-   "d": "09/10",
-   "t": "TMK · Calendário Outubro · Temakeria",
-   "c": "TMK#241",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/241#issuecomment-6082770357",
-   "n": "Pode editar esse, por favor? até o dia 16/10 https://app.notion.com/p/Post-compartilh-vel-te-deve-3df9a912404f803da099c63641367832?source=copylink"
-  },
-  {
    "g": "luiza",
    "q": "Luiza",
    "d": "08/10",
@@ -409,258 +391,14 @@ const DADOS = {
   {
    "g": "luiza",
    "q": "Luiza",
-   "d": "08/10",
-   "t": "Alinhar fotos - Big Hot de banana com doce de leite",
-   "c": "TMK#150",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/150#issuecomment-6070269573",
-   "n": "Fechando a pedido da (08/10). Registro: em 23/09 o entregou as fotos dos combos no Drive. A regravação do vídeo do Big Hot pedida pela Manu em 18/09 (mão sem luva) não ap…"
-  },
-  {
-   "g": "luiza",
-   "q": "Luiza",
-   "d": "08/10",
-   "t": "TMK · Artes para o instagram - Setembro - Ficou com Lorenna, João dá o check",
-   "c": "TMK#217",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/217#issuecomment-6070183946",
-   "n": "Fechando a pedido da (08/10): o ciclo de setembro acabou. Evidência no card: - 31/08 · entregou o carrossel \"R$10 + R$50\" no Drive - 01/09 · atualizou o card com as artes…"
-  },
-  {
-   "g": "gabi",
-   "q": "Gabi",
-   "d": "08/10",
-   "t": "LANGS · Calendário Outubro · Langs",
-   "c": "cs-langs#81",
-   "u": "https://github.com/dev-seven7/cs-langs/issues/81#issuecomment-6069485667",
-   "n": "o link da campanha de outubro da Lang's foi atualizado com as respostas do Anderson (08/10): https://dev-seven7.github.io/langs-outubro/ ✅ O que o Anderson fechou - Parce…"
-  },
-  {
-   "g": "gabi",
-   "q": "Gabi",
-   "d": "08/10",
-   "t": "LANGS · Cardápio & Produto · Novidades -  setembro a dezembro",
-   "c": "cs-langs#40",
-   "u": "https://github.com/dev-seven7/cs-langs/issues/40#issuecomment-6069476037",
-   "n": "João, prioridade amanhã (sexta, 09/10): 1 imagem do Combo Kids para o Dia das Crianças (12/10). É rápida, mas precisa estar pronta amanhã para dar tempo de aprovar e post…"
-  },
-  {
-   "g": "gabi",
-   "q": "Gabi",
-   "d": "07/10",
-   "t": "LANGS · Cardápio · Arte do papel de bandeja (salão) · Briefing + Design",
-   "c": "cs-langs#57",
-   "u": "https://github.com/dev-seven7/cs-langs/issues/57#issuecomment-6047524713",
-   "n": "novo prazo da arte do papel de bandeja: sexta-feira, 09/10/2026 (definido pela Gabi). O Anderson confirmou na mensagem da semana passada: \"Papel da bandeja: já traz as ar…"
-  },
-  {
-   "g": "gabi",
-   "q": "Gabi",
-   "d": "07/10",
-   "t": "OGRO · Calendário de Conteúdo · Outubro",
-   "c": "cs-ogro-steaks#20",
-   "u": "https://github.com/dev-seven7/cs-ogro-steaks/issues/20#issuecomment-6044626491",
-   "n": "📨 Resposta da Alline no Sults · promoções de outubro da Ogro (07/10) 15/10 · Dia do Professor - Prêmio: 1 mês do pedido favorito do professor (4 pedidos), entregue direto…"
-  },
-  {
-   "g": "gabi",
-   "q": "Gabi",
-   "d": "07/10",
-   "t": "TMK · Araruama · Landing de captação + CRM + cupons (hot roll isca + 1ª compra)",
-   "c": "TMK#16",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/16#issuecomment-6044626070",
-   "n": "✅ AMOTEMAKERIA definido pela Alline (Sults, 07/10): R$ 10 de desconto, pedido mínimo de R$ 59,90. Só no canal próprio, 1 uso por cliente, não acumula com item em promoção…"
-  },
-  {
-   "g": "gabi",
-   "q": "Gabi",
-   "d": "07/10",
-   "t": "TMK · Calendário Outubro · Temakeria",
-   "c": "TMK#241",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/241#issuecomment-6044625687",
-   "n": "📨 Resposta da Alline no Sults · cupons de outubro da Temakeria (07/10) Regra: só no canal próprio, 1 uso por cliente e não acumula com item que já está em promoção. | Cup…"
-  },
-  {
-   "g": "manu",
-   "q": "Manu",
-   "d": "07/10",
-   "t": "ROB · Campanha iFood · Fotos dos 15 combos promocionais (Øliver's, Ogro, Temakeria)",
-   "c": "cs-rob-food#123",
-   "u": "https://github.com/dev-seven7/cs-rob-food/issues/123#issuecomment-6044587109",
-   "n": "todas as fotos que precisamos estão detalhadas acima, qualquer dúvida é só falar. Precisamos delas até amanhã as 14h00."
-  },
-  {
-   "g": "manu",
-   "q": "Manu",
-   "d": "07/10",
-   "t": "TMK · Araruama · Editar criativos · Lançamento Temakeria",
-   "c": "TMK#230",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/230#issuecomment-6044238538",
-   "n": "os feedbacks estão no próprio Drive, direto em cada peça entregue."
-  },
-  {
-   "g": "luiza",
-   "q": "Luiza",
-   "d": "07/10",
-   "t": "TMK · Araruama · Tagline dos Instagrams RJ e SP (Araruama, SG, Lapa)",
-   "c": "TMK#17",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/17#issuecomment-6042340203",
-   "n": "João, como estão os destaques do Instagram da Temakeria (Horários · Endereço · Delivery)? O prazo é hoje (07/10), eles precisam estar no ar 2 dias antes da inauguração de…"
-  },
-  {
-   "g": "luiza",
-   "q": "Luiza",
-   "d": "06/10",
-   "t": "TMK · Araruama · Tagline dos Instagrams RJ e SP (Araruama, SG, Lapa)",
-   "c": "TMK#17",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/17#issuecomment-6024089275",
-   "n": "João, aqui o briefing dos destaques do Instagram da Temakeria (é o mesmo do meu comentário de 30/09 aqui no card: https://github.com/dev-seven7/cs-temakeria-universitaria…"
-  },
-  {
-   "g": "luiza",
-   "q": "Luiza",
    "d": "06/10",
    "t": "ROB · Revitalização dos destaques (highlights) do perfil do Grupo ROB",
    "c": "cs-rob-food#14",
    "u": "https://github.com/dev-seven7/cs-rob-food/issues/14#issuecomment-6022889627",
    "n": "fotos separadas ✅ pros destaques do Grupo ROB (Grupo ROB · Øliver's · Temakeria · Ogro · Franqueados · Na Mídia). 📸 Inauguração da Lapa 1. https://drive.google.com/file/d…"
-  },
-  {
-   "g": "otavio",
-   "q": "Otávio",
-   "d": "06/10",
-   "t": "TMK · Calendário Outubro · Temakeria",
-   "c": "TMK#241",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/241#issuecomment-6019929366",
-   "n": "organizei o calendário: https://app.notion.com/p/2-Calend-rio-Editorial-8cc9a912404f8206ac9481e2c2fe1560 Alterações feitas no vídeo de ativação, esperando review: https:/…"
-  },
-  {
-   "g": "manu",
-   "q": "Manu",
-   "d": "06/10",
-   "t": "TMK · Araruama · Editar criativos · Lançamento Temakeria",
-   "c": "TMK#230",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/230#issuecomment-6016523886",
-   "n": "conseguiu concluir os criativos de meio e fundo de funil da Araruama? Ficou com alguma dúvida? Precisamos subir isso hoje na campanha: a loja inaugura sexta, dia 09/10, f…"
-  },
-  {
-   "g": "manu",
-   "q": "Manu",
-   "d": "06/10",
-   "t": "LANGS · Cardápio · Arte do papel de bandeja (salão) · Briefing + Design",
-   "c": "cs-langs#57",
-   "u": "https://github.com/dev-seven7/cs-langs/issues/57#issuecomment-6008723750",
-   "n": "João, reforçando o prazo dessa demanda: quarta-feira, 07/10, é o prazo final da arte do papel de bandeja, pra gente conseguir revisar e entregar pro Anderson a tempo."
-  },
-  {
-   "g": "gabi",
-   "q": "Gabi",
-   "d": "05/10",
-   "t": "OGRO · Calendário de Conteúdo · Outubro",
-   "c": "cs-ogro-steaks#20",
-   "u": "https://github.com/dev-seven7/cs-ogro-steaks/issues/20#issuecomment-6002529321",
-   "n": "📍 Call Gabi × Alline · 05/10/2026 · registro: [cs-rob-food122](https://github.com/dev-seven7/cs-rob-food/issues/122) 📺 iFood · ação de bonificação (esta semana) - Em sete…"
-  },
-  {
-   "g": "luiza",
-   "q": "Luiza",
-   "d": "05/10",
-   "t": "TMK · Araruama · Tagline dos Instagrams RJ e SP (Araruama, SG, Lapa)",
-   "c": "TMK#17",
-   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/17#issuecomment-5998178238",
-   "n": "João, prioridade pra amanhã (06/10): os destaques do Instagram da Temakeria (Horários · Endereço · Delivery). O briefing já está aqui no card, no meu comentário de 30/09.…"
   }
  ],
- "checks": [
-  {
-   "bloco": "Entregues ou fora da esteira do João",
-   "emoji": "✅",
-   "itens": [
-    {
-     "t": "OLV · Pulseira Rodízio + Roleta de Mesa",
-     "c": "cs-olivers#144",
-     "u": "https://github.com/dev-seven7/cs-olivers/issues/144",
-     "n": "entrega prevista entre 09 e 13/10, não está atrasada"
-    },
-    {
-     "t": "TMK · Araruama · Brindes + impressos (imã QR, imã 3D, flyer de carro, kit sushi)",
-     "c": "TMK#13",
-     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/13",
-     "n": "entregue"
-    },
-    {
-     "t": "TMK · GATE · Reprecificação + cardápio novo ·",
-     "c": "TMK#187",
-     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/187",
-     "n": "concluído"
-    },
-    {
-     "t": "TMK · Campanha cruzada com Øliver's · degustação + panfleto/cupom em São Gonçalo",
-     "c": "TMK#39",
-     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/39",
-     "n": "já está rodando, o panfleto também foi feito"
-    },
-    {
-     "t": "🎨 🏢 ROB · Multi-marca · Artes de material impresso e uniforme para franqueados",
-     "c": "cs-rob-food#115",
-     "u": "https://github.com/dev-seven7/cs-rob-food/issues/115",
-     "n": "entregue e validado"
-    },
-    {
-     "t": "TMK · Araruama · Giveaway de inauguracao · Briefing + Design",
-     "c": "TMK#127",
-     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/127",
-     "n": "entregue"
-    },
-    {
-     "t": "TMK · Rebranding da marca · logo v2.0 e identidade",
-     "c": "TMK#7",
-     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/7",
-     "n": "sai da esteira do João, não vai ser feito por ele"
-    },
-    {
-     "t": "TMK · Lapa · Landing de captação · Briefing + Design",
-     "c": "TMK#193",
-     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/193",
-     "n": "check, sai da esteira do João"
-    },
-    {
-     "t": "OLV · Matheus · Cartão de confirmação de reservas",
-     "c": "cs-olivers#106",
-     "u": "https://github.com/dev-seven7/cs-olivers/issues/106",
-     "n": "passa para a Manu, sem urgência, prioridade para os próximos meses"
-    },
-    {
-     "t": "ROB · Comercial · Apresentações de venda · padronizar Ogro + criar Temaqueria",
-     "c": "cs-rob-food#4",
-     "u": "https://github.com/dev-seven7/cs-rob-food/issues/4",
-     "n": "sai dos atrasados (handoff de 01/10)"
-    },
-    {
-     "t": "OLV · Piratininga / Região Oceânica (Michelle) · lançamento da unidade · onboarding presencial 25/09 + cronograma de 20 a 22 dias",
-     "c": "cs-olivers#229",
-     "u": "https://github.com/dev-seven7/cs-olivers/issues/229",
-     "n": "resolvido: a fachada passou para o arquiteto"
-    },
-    {
-     "t": "TMK · Artes para o instagram - Setembro - Ficou com Lorenna, João dá o check",
-     "c": "TMK#217",
-     "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/217",
-     "n": "ficou com a Lorenna"
-    },
-    {
-     "t": "governance-s7#78",
-     "c": "governance-s7#78",
-     "u": "https://github.com/dev-seven7/governance-s7/issues/78",
-     "n": "iFood de setembro já entregue, check"
-    },
-    {
-     "t": "Ogro Steaks · Onboarding (full service)",
-     "c": "cs-ogro-steaks#1",
-     "u": "https://github.com/dev-seven7/cs-ogro-steaks/issues/1",
-     "n": "sai dos atrasados: fica só como ciência dele, sem cobrança"
-    }
-   ]
-  }
- ],
+ "checks": [],
  "feito": [
   {
    "d": "09/10",
@@ -735,7 +473,93 @@ const DADOS = {
    "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/150"
   }
  ],
- "amanha": []
+ "amanha": [],
+ "concluidosManual": [
+  {
+   "t": "OLV · Calendário Outubro · Øliver's",
+   "c": "cs-olivers#238",
+   "u": "https://github.com/dev-seven7/cs-olivers/issues/238#issuecomment-6089595997",
+   "tag": "",
+   "n": "Luiza · 09/10 · ✅ Arte entregue na issue."
+  },
+  {
+   "t": "TMK · Calendário Outubro · Temakeria",
+   "c": "TMK#241",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/241#issuecomment-6082770357",
+   "tag": "",
+   "n": "Otávio · 09/10 · ✅ Edição entregue no Drive (link na issue)."
+  },
+  {
+   "t": "Alinhar fotos - Big Hot de banana com doce de leite",
+   "c": "TMK#150",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/150#issuecomment-6070269573",
+   "tag": "",
+   "n": "Luiza · 08/10 · ✅ Issue fechada."
+  },
+  {
+   "t": "TMK · Artes para o instagram - Setembro - Ficou com Lorenna, João dá o check",
+   "c": "TMK#217",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/217#issuecomment-6070183946",
+   "tag": "",
+   "n": "Luiza · 08/10 · ✅ Issue fechada (ciclo de setembro)."
+  },
+  {
+   "t": "ROB · Campanha iFood · Fotos dos 15 combos promocionais (Øliver's, Ogro, Temakeria)",
+   "c": "cs-rob-food#123",
+   "u": "https://github.com/dev-seven7/cs-rob-food/issues/123#issuecomment-6044587109",
+   "tag": "",
+   "n": "Manu · 07/10 · ✅ Fotos dos combos iFood, issue fechada."
+  },
+  {
+   "t": "TMK · Araruama · Editar criativos · Lançamento Temakeria",
+   "c": "TMK#230",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/230#issuecomment-6044238538",
+   "tag": "",
+   "n": "Manu · 07/10 · ✅ Criativos de Araruama entregues no Drive."
+  },
+  {
+   "t": "TMK · Araruama · Tagline dos Instagrams RJ e SP (Araruama, SG, Lapa)",
+   "c": "TMK#17",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/17#issuecomment-6042340203",
+   "tag": "",
+   "n": "Luiza · 07/10 · ✅ Destaques da Temakeria entregues no Drive."
+  },
+  {
+   "t": "TMK · Araruama · Tagline dos Instagrams RJ e SP (Araruama, SG, Lapa)",
+   "c": "TMK#17",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/17#issuecomment-6024089275",
+   "tag": "",
+   "n": "Luiza · 06/10 · ✅ Destaques da Temakeria entregues no Drive."
+  },
+  {
+   "t": "TMK · Calendário Outubro · Temakeria",
+   "c": "TMK#241",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/241#issuecomment-6019929366",
+   "tag": "",
+   "n": "Otávio · 06/10 · ✅ Edição entregue no Drive (link na issue)."
+  },
+  {
+   "t": "TMK · Araruama · Editar criativos · Lançamento Temakeria",
+   "c": "TMK#230",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/230#issuecomment-6016523886",
+   "tag": "",
+   "n": "Manu · 06/10 · ✅ Criativos de Araruama entregues no Drive."
+  },
+  {
+   "t": "LANGS · Cardápio · Arte do papel de bandeja (salão) · Briefing + Design",
+   "c": "cs-langs#57",
+   "u": "https://github.com/dev-seven7/cs-langs/issues/57#issuecomment-6008723750",
+   "tag": "",
+   "n": "Manu · 06/10 · ✅ Papel de bandeja entregue (PDF), issue fechada."
+  },
+  {
+   "t": "TMK · Araruama · Tagline dos Instagrams RJ e SP (Araruama, SG, Lapa)",
+   "c": "TMK#17",
+   "u": "https://github.com/dev-seven7/cs-temakeria-universitaria/issues/17#issuecomment-5998178238",
+   "tag": "",
+   "n": "Luiza · 05/10 · ✅ Destaques da Temakeria entregues no Drive."
+  }
+ ]
 };;;;;;;;;
 </script>
 <script>
@@ -833,7 +657,7 @@ const SECOES_CARD = [
 ];
 
 function renderCards(){
-  const concluidos = [];
+  const concluidos = (DADOS.concluidosManual||[]).slice();
   SECOES_CARD.forEach(s=>{
     const pendentes = s.itens.filter(o=>!marcado(o.t));
     s.itens.filter(o=>marcado(o.t)).forEach(o=>concluidos.push(o));
@@ -858,7 +682,7 @@ function renderCards(){
 }
 renderCards();
 
-const grupos = {manu:"Marcações da Manu", luiza:"Marcações da Luiza", otavio:"Marcações do Otávio", gabi:"Marcações da Gabi"};
+const grupos = {manu:"Marcações da Manu", luiza:"Marcações da Luiza", otavio:"Marcações do Otávio"};
 $("#lista-mencoes").innerHTML = Object.keys(grupos).map(g=>{
   const itens = DADOS.mencoes.filter(m=>m.g===g);
   if(!itens.length) return "";
